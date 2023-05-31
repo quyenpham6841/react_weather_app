@@ -7,7 +7,17 @@ const refresh = () => {
   window.location.reload();
 };
 
+const capitalizeFirst = (str: string | undefined) => {
+  if (str === undefined) {
+    return "";
+  }
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
 function WeatherCard({ weatherData }: { weatherData: WeatherResponse }) {
+  const iconUrl = `${process.env.REACT_APP_ICON_URL}/${
+    (weatherData?.weather ?? [])[0].icon
+  }.png`;
   return (
     <div className="page">
       <div className="main">
@@ -26,7 +36,14 @@ function WeatherCard({ weatherData }: { weatherData: WeatherResponse }) {
           <p className="day">
             {moment().format("dddd")}, <span>{moment().format("LL")}</span>
           </p>
-          <p className="description">{(weatherData?.weather ?? [])[0].main}</p>
+          <div className="description">
+            <div className="flex2">
+              <img alt="" className="icon" src={iconUrl}></img>{" "}
+              <p>
+                {capitalizeFirst((weatherData?.weather ?? [])[0].description)}
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className="flex">
@@ -34,7 +51,9 @@ function WeatherCard({ weatherData }: { weatherData: WeatherResponse }) {
           <p className="temp">Humidity: {weatherData?.main?.humidity} %</p>
         </div>
         <div className="flex">
-          <p className="temp">Feels like: {weatherData?.main?.feels_like} &deg;C</p>
+          <p className="temp">
+            Feels like: {weatherData?.main?.feels_like} &deg;C
+          </p>
           <p className="temp">Wind speed: {weatherData?.wind?.speed} m/s</p>
         </div>
 
