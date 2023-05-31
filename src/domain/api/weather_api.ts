@@ -2,7 +2,8 @@ import { WeatherResponse } from "../models/weather_response";
 import axios from "axios";
 
 export const getWeatherResult = async (lat: number, long: number) => {
-    const url = `https://api.openweathermap.org/data/2.5/weather/?lat=${lat}&lon=${long}&units=metric&APPID=f024fe03b1b2c4a1e3c33b2bd875b97b`;
+    const url = `${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`;
+    console.log(url);
     const { data } = await axios.get(url);
     return data as WeatherResponse;
 };

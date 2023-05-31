@@ -33,18 +33,22 @@ function WeatherCard({ weatherData }: { weatherData: WeatherResponse }) {
           <p className="temp">Temprature: {weatherData?.main?.temp} &deg;C</p>
           <p className="temp">Humidity: {weatherData?.main?.humidity} %</p>
         </div>
+        <div className="flex">
+          <p className="temp">Feels like: {weatherData?.main?.feels_like} &deg;C</p>
+          <p className="temp">Wind speed: {weatherData?.wind?.speed} m/s</p>
+        </div>
 
         <div className="flex">
           <p className="sunrise-sunset">
             Sunrise:{" "}
             {new Date(weatherData?.sys?.sunrise ?? 0 * 1000).toLocaleTimeString(
-              "vi-IN"
+              "en-IN"
             )}
           </p>
           <p className="sunrise-sunset">
             Sunset:{" "}
             {new Date(weatherData?.sys?.sunset ?? 0 * 1000).toLocaleTimeString(
-              "vi-IN"
+              "en-IN"
             )}
           </p>
         </div>
